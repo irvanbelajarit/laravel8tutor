@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    echo "ini masuk ke home";
+Route::get('/about', function () {
+    return view('about');
 });
 
-Route::get('/contact', [ContactController::class,'index'])->middleware('age');
+Route::get('/contact', [ContactController::class,'index'])->name('con');
