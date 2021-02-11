@@ -35,6 +35,7 @@
                         <th scope="col">Category Name</th>
                         <th scope="col">User</th>
                         <th scope="col">Created</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -44,9 +45,12 @@
                       <tr>
                         <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
                         <td>{{ $category->category_name }}</td>
-                        <td>{{ $category->name }}</td>
+                        <td>{{ $category->user->name }}</td>
                         <td>{{ $category->created_at }}</td>
-                        
+                        <td>
+                          <a href="{{ url('category/edit/'.$category->id) }}" class="btn btn-info">edit</a>
+                          <a href="" class="btn btn-danger">delete</a>
+                        </td>
                       </tr>
                      @endforeach
                     </tbody>
