@@ -14,7 +14,13 @@ class CategoryController extends Controller
     //all category
     public function AllCat()
     {
-        return view('admin.category.index');
+        //eloquent
+        //$categories = Category::all();
+        //$categories = Category::latest()->get();
+
+        //query builder
+        $categories = DB::table('categories')->latest()->get();
+        return view('admin.category.index',compact('categories'));
     }
     //add category
     public function AddCat(Request $request)
@@ -36,16 +42,16 @@ class CategoryController extends Controller
 
         //     ]);
 
-        // $category = new Category;
-        // $category->category_name = $request->category_name;
-        // $category->user_id= Auth::user()->id;
-        // $category->save();
+        $category = new Category;
+        $category->category_name = $request->category_name;
+        $category->user_id= Auth::user()->id;
+        $category->save();
 
             //query builder
-        $data = array();
-        $data['category_name'] = $request->category_name;
-        $data['user_id'] = Auth::user()->id;
-        DB::table('categories')->insert($data);
+        // $data = array();
+        // $data['category_name'] = $request->category_name;
+        // $data['user_id'] = Auth::user()->id;
+        // DB::table('categories')->insert($data);
 
 
         return Redirect()->back()->with('success', 'Category tersimpan');
