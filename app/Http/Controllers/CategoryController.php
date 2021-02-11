@@ -17,11 +17,18 @@ class CategoryController extends Controller
         //eloquent
         //$categories = Category::all();
         //$categories = Category::latest()->get();
-        $categories = Category::latest()->paginate(5);
+    //    $categories = Category::latest()->paginate(5);
 
         //query builder
 
        // $categories = DB::table('categories')->latest()->paginate(5);
+
+       $categories=DB::table('categories')
+        ->join('users','categories.user_id','users.id')
+        ->select('categories.*','users.name')
+        ->latest()->paginate(5);
+
+
         return view('admin.category.index',compact('categories'));
     }
     //add category

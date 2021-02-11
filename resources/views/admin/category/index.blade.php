@@ -44,7 +44,7 @@
                       <tr>
                         <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
                         <td>{{ $category->category_name }}</td>
-                        <td>{{ $category->user->name }}</td>
+                        <td>{{ $category->name }}</td>
                         <td>{{ $category->created_at }}</td>
                         
                       </tr>
