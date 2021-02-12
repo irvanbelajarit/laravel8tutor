@@ -9,6 +9,7 @@
     </x-slot>
 
     <div class="py-12">
+
         <div class="container">
             <div class="row">
 
@@ -49,7 +50,7 @@
                         <td>{{ $category->created_at }}</td>
                         <td>
                           <a href="{{ url('category/edit/'.$category->id) }}" class="btn btn-info">edit</a>
-                          <a href="" class="btn btn-danger">delete</a>
+                          <a href="{{ url('softdelete/category/'.$category->id) }}" class="btn btn-danger">delete</a>
                         </td>
                       </tr>
                      @endforeach
@@ -84,4 +85,58 @@
             </div>
         </div>
     </div>
+
+    {{-- trash  --}}
+    <div class="container">
+      <div class="row">
+
+
+
+        <div class="col-md-8">
+          <div class="card">
+           
+            <div class="card-header">
+              Trash List
+            </div>
+
+        
+
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Serial No</th>
+                  <th scope="col">Category Name</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Created</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{-- @php($i=1) --}}
+
+                 @foreach($trashCat as $category)
+                <tr>
+                  <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
+                  <td>{{ $category->category_name }}</td>
+                  <td>{{ $category->user->name }}</td>
+                  <td>{{ $category->created_at }}</td>
+                  <td>
+                    <a href="{{ url('category/restore/'.$category->id) }}" class="btn btn-info">Restore</a>
+                    <a href="{{ url('pdelete/category/'.$category->id) }}" class="btn btn-danger">Pdelete</a>
+                  </td>
+                </tr>
+               @endforeach
+              </tbody>
+            </table>
+
+            {{$trashCat->links()}}
+
+          </div>
+        </div>
+        
+      </div>
+      {{-- end trash --}}
+  </div>
+
+
 </x-app-layout>
