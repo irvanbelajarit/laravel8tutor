@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 use APP\Models\User;
 
@@ -34,7 +35,7 @@ Route::get('/category/all', [CategoryController::class,'AllCat'])->name('all.cat
 //category add controller
 Route::post('/category/add', [CategoryController::class,'AddCat'])->name('store.category');
 
-//category edit 
+//category edit
 Route::get('/category/edit/{id}', [CategoryController::class,'Edit']);
 
 //update category
@@ -53,3 +54,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $users= DB::table('users')->get();
     return view('dashboard',compact('users'));
 })->name('dashboard');
+
+
+Route::get('/employee', [EmployeeController::class,'index'])->name('employee');
+Route::get('/employee/getUsers/{id}', [EmployeeController::class,'getUsers'])->name('employee.getUsers');
